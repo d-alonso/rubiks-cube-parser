@@ -1,4 +1,4 @@
-#Rubiks cube parser
+# Rubiks cube parser
 
 Para resolver "puzles giratorios" como los cubos de rubik, se suele definir una notación estándard para ser usada por la comunidad y compartir algoritmos y soluciones. Para los cubos de rubik por ejemplo, esta notación consta de una letra:
 
@@ -8,10 +8,10 @@ que indican una rotación de 90º en el sentido de las agujas del reloj de la ca
 
 Estos movimientos se pueden extender o combinar para formar unos nuevos, lo cual se ve necesario cuantas más capas añadas al cubo. Por ejemplo:
 
-    -un apóstrofe (') después de un movimiento indica que la rotación es inversa a la habitual
-    -para los cubos 3x3x3, existe la notación (Lw) o 'Left wide', que indica que además de mover la capa izquierda hay que mover la central junto a ella.
-    -x, y o z indican que se rota el cubo entero alrededor de cada uno de esos ejes que lo atraviesan
-    -cualquier secuencia de movimientos entre paréntesis y con un multiplicador, por ejemplo, (R U R' U')x2 indica que ésta se debe repetir por el número indicado.
+* un apóstrofe (') después de un movimiento indica que la rotación es inversa a la habitual
+* para los cubos 3x3x3, existe la notación (Lw) o 'Left wide', que indica que además de mover la capa izquierda hay que mover la central junto a ella.
+* x, y o z indican que se rota el cubo entero alrededor de cada uno de esos ejes que lo atraviesan
+* cualquier secuencia de movimientos entre paréntesis y con un multiplicador, por ejemplo, (R U R' U')x2 indica que ésta se debe repetir por el número indicado.
  
 
 Mi programa analiza ficheros que contengan secuencias de movimientos. El analizador léxico convierte cada uno de estos movimientos y modificadores en tokens, incluyendo la sentencia de multiplicación.
@@ -24,10 +24,10 @@ Por ello, acabé usando una lista o un stack en el que voy mirando el anterior m
 
 La lista de movimientos de salida la usa la clase Rubik de los archivos rubiks.h y rubiks.cpp. Realmente no funcionan como debería ahora mismo, tiene un fallo de lógica al ejecutar los movimientos sobre el cubo. Se visualiza por consola.
 
-#TODO
+# TODO
 Arreglar la ejecución de movimientos sobre el cubo. Añadir  visualización 3D.
 
-#Instrucciones
+# Instrucciones
 
 Linux. Para compilar y probar ejecutar "make" en el directorio
 Ejecutar `rubiks` y escribir movimientos en la entrada estándard, o escribir en un archivo como `ejemplo_rubiks.txt` y usarlo como argumento: `./rubiks ejemplo_rubiks.txt`.
