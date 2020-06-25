@@ -1,0 +1,283 @@
+Estado 14 conflictos: 6 desplazamiento/reducción
+
+
+Gramática
+
+    0 $accept: S $end
+
+    1 S: move
+
+    2 move: %empty
+    3     | move OPEN_BR move
+    4     | move OPEN_BR move CLOSE_BR
+    5     | move tipo mod
+    6     | move tipo
+    7     | move error
+    8     | move errorModMulti
+
+    9 tipo: CARA
+   10     | CARA MODMULTI
+   11     | MULTI
+   12     | CUBO
+
+   13 mod: INVERSO
+   14    | doble
+
+   15 doble: DOBLE
+   16      | DOBLE INVERSO
+   17      | INVERSO DOBLE
+
+   18 errorModMulti: MULTI MODMULTI
+   19              | CUBO MODMULTI
+
+
+Terminales con las reglas donde aparecen
+
+$end (0) 0
+error (256) 7
+CARA (258) 9 10
+MULTI (259) 11 18
+CUBO (260) 12 19
+OPEN_BR (261) 3 4
+CLOSE_BR (262) 4
+INVERSO (263) 13 16 17
+DOBLE (264) 15 16 17
+MODMULTI (265) 10 18 19
+
+
+No terminales con las reglas donde aparecen
+
+$accept (11)
+    en la izquierda: 0
+S (12)
+    en la izquierda: 1, en la derecha: 0
+move (13)
+    en la izquierda: 2 3 4 5 6 7 8, en la derecha: 1 3 4 5 6 7 8
+tipo (14)
+    en la izquierda: 9 10 11 12, en la derecha: 5 6
+mod (15)
+    en la izquierda: 13 14, en la derecha: 5
+doble (16)
+    en la izquierda: 15 16 17, en la derecha: 14
+errorModMulti (17)
+    en la izquierda: 18 19, en la derecha: 8
+
+
+Estado 0
+
+    0 $accept: . S $end
+
+    $default  reduce usando la regla 2 (move)
+
+    S     ir al estado 1
+    move  ir al estado 2
+
+
+Estado 1
+
+    0 $accept: S . $end
+
+    $end  desplazar e ir al estado 3
+
+
+Estado 2
+
+    1 S: move .
+    3 move: move . OPEN_BR move
+    4     | move . OPEN_BR move CLOSE_BR
+    5     | move . tipo mod
+    6     | move . tipo
+    7     | move . error
+    8     | move . errorModMulti
+
+    error    desplazar e ir al estado 4
+    CARA     desplazar e ir al estado 5
+    MULTI    desplazar e ir al estado 6
+    CUBO     desplazar e ir al estado 7
+    OPEN_BR  desplazar e ir al estado 8
+
+    $end  reduce usando la regla 1 (S)
+
+    tipo           ir al estado 9
+    errorModMulti  ir al estado 10
+
+
+Estado 3
+
+    0 $accept: S $end .
+
+    $default  aceptar
+
+
+Estado 4
+
+    7 move: move error .
+
+    $default  reduce usando la regla 7 (move)
+
+
+Estado 5
+
+    9 tipo: CARA .
+   10     | CARA . MODMULTI
+
+    MODMULTI  desplazar e ir al estado 11
+
+    $default  reduce usando la regla 9 (tipo)
+
+
+Estado 6
+
+   11 tipo: MULTI .
+   18 errorModMulti: MULTI . MODMULTI
+
+    MODMULTI  desplazar e ir al estado 12
+
+    $default  reduce usando la regla 11 (tipo)
+
+
+Estado 7
+
+   12 tipo: CUBO .
+   19 errorModMulti: CUBO . MODMULTI
+
+    MODMULTI  desplazar e ir al estado 13
+
+    $default  reduce usando la regla 12 (tipo)
+
+
+Estado 8
+
+    3 move: move OPEN_BR . move
+    4     | move OPEN_BR . move CLOSE_BR
+
+    $default  reduce usando la regla 2 (move)
+
+    move  ir al estado 14
+
+
+Estado 9
+
+    5 move: move tipo . mod
+    6     | move tipo .
+
+    INVERSO  desplazar e ir al estado 15
+    DOBLE    desplazar e ir al estado 16
+
+    $default  reduce usando la regla 6 (move)
+
+    mod    ir al estado 17
+    doble  ir al estado 18
+
+
+Estado 10
+
+    8 move: move errorModMulti .
+
+    $default  reduce usando la regla 8 (move)
+
+
+Estado 11
+
+   10 tipo: CARA MODMULTI .
+
+    $default  reduce usando la regla 10 (tipo)
+
+
+Estado 12
+
+   18 errorModMulti: MULTI MODMULTI .
+
+    $default  reduce usando la regla 18 (errorModMulti)
+
+
+Estado 13
+
+   19 errorModMulti: CUBO MODMULTI .
+
+    $default  reduce usando la regla 19 (errorModMulti)
+
+
+Estado 14
+
+    3 move: move . OPEN_BR move
+    3     | move OPEN_BR move .
+    4     | move . OPEN_BR move CLOSE_BR
+    4     | move OPEN_BR move . CLOSE_BR
+    5     | move . tipo mod
+    6     | move . tipo
+    7     | move . error
+    8     | move . errorModMulti
+
+    error     desplazar e ir al estado 4
+    CARA      desplazar e ir al estado 5
+    MULTI     desplazar e ir al estado 6
+    CUBO      desplazar e ir al estado 7
+    OPEN_BR   desplazar e ir al estado 8
+    CLOSE_BR  desplazar e ir al estado 19
+
+    $end      reduce usando la regla 3 (move)
+    error     [reduce usando la regla 3 (move)]
+    CARA      [reduce usando la regla 3 (move)]
+    MULTI     [reduce usando la regla 3 (move)]
+    CUBO      [reduce usando la regla 3 (move)]
+    OPEN_BR   [reduce usando la regla 3 (move)]
+    CLOSE_BR  [reduce usando la regla 3 (move)]
+
+    tipo           ir al estado 9
+    errorModMulti  ir al estado 10
+
+
+Estado 15
+
+   13 mod: INVERSO .
+   17 doble: INVERSO . DOBLE
+
+    DOBLE  desplazar e ir al estado 20
+
+    $default  reduce usando la regla 13 (mod)
+
+
+Estado 16
+
+   15 doble: DOBLE .
+   16      | DOBLE . INVERSO
+
+    INVERSO  desplazar e ir al estado 21
+
+    $default  reduce usando la regla 15 (doble)
+
+
+Estado 17
+
+    5 move: move tipo mod .
+
+    $default  reduce usando la regla 5 (move)
+
+
+Estado 18
+
+   14 mod: doble .
+
+    $default  reduce usando la regla 14 (mod)
+
+
+Estado 19
+
+    4 move: move OPEN_BR move CLOSE_BR .
+
+    $default  reduce usando la regla 4 (move)
+
+
+Estado 20
+
+   17 doble: INVERSO DOBLE .
+
+    $default  reduce usando la regla 17 (doble)
+
+
+Estado 21
+
+   16 doble: DOBLE INVERSO .
+
+    $default  reduce usando la regla 16 (doble)
